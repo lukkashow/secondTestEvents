@@ -1,12 +1,7 @@
 package com.lucaaodev.secondTestEvents.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 
@@ -24,13 +19,18 @@ public class Bloco {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant fim;
 
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
+
     public Bloco() {
     }
 
-    public Bloco(Integer id, Instant inicio, Instant fim) {
+    public Bloco(Integer id, Instant inicio, Instant fim, Atividade atividade) {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
+        this.atividade = atividade;
     }
 
     public Integer getId() {
