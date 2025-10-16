@@ -1,12 +1,10 @@
 package com.lucaaodev.secondTestEvents.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_participante")
@@ -21,8 +19,14 @@ public class Participante {
     @Column(unique = true)
     private String email;
 
+
+    @ManyToMany(mappedBy = "participantes")
+    private Set<Atividade>atividades = new HashSet<>();
+
+
     public Participante() {
     }
+
 
     public Participante(Integer id, String name, String email) {
         this.id = id;
@@ -52,5 +56,9 @@ public class Participante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Atividade> getAtividades() {
+        return atividades;
     }
 }
