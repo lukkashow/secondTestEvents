@@ -2,8 +2,8 @@ package com.lucaaodev.secondTestEvents.entities;
 
 
 import jakarta.persistence.*;
-
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -14,7 +14,7 @@ public class Participante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private String nome;
 
     @Column(unique = true)
     private String email;
@@ -28,9 +28,9 @@ public class Participante {
     }
 
 
-    public Participante(Integer id, String name, String email) {
+    public Participante(Integer id, String nome, String email) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.email = email;
     }
 
@@ -42,12 +42,12 @@ public class Participante {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -60,5 +60,18 @@ public class Participante {
 
     public Set<Atividade> getAtividades() {
         return atividades;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Participante that = (Participante) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
